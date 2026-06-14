@@ -36,30 +36,51 @@ function Navbar({ scrollToId }) {
         {/* Navigation Menu Links */}
         <ul className="nav-menu" style={{ display: 'flex', gap: '24px', listStyle: 'none' }}>
           <li>
-            <a 
-              href="#" 
+            <a
+              href="#"
               className="nav-link active"
-              onClick={(e) => { 
-                e.preventDefault(); 
-                window.scrollTo({ top: 0, behavior: 'smooth' }); 
+              onClick={(e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
             >
               Home
             </a>
           </li>
+
           <li>
-            <a 
-              href="#katalog" 
-              onClick={(e) => { e.preventDefault(); scrollToId('katalog'); }} 
+            <a
+              href="#katalog"
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToId('katalog');
+              }}
               className="nav-link"
             >
               Koleksi Kaos
             </a>
           </li>
+
           <li>
-            <a 
-              href="#footer" 
-              onClick={(e) => { e.preventDefault(); scrollToId('footer'); }} 
+            <a
+              href="#review"
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToId('review');
+              }}
+              className="nav-link"
+            >
+              Review
+            </a>
+          </li>
+
+          <li>
+            <a
+              href="#footer"
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToId('footer');
+              }}
               className="nav-link"
             >
               Tentang SIBER

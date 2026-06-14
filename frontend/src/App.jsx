@@ -8,6 +8,7 @@ import Footer from './layouts/Footer';
 import HeroSection from './pages/HeroSection';
 import AboutSection from './pages/AboutSection';
 import ProductSection from './pages/ProductSection';
+import ReviewSection from './pages/ReviewSection';
 
 // Components
 import ProductDetailModal from './components/ProductDetailModal';
@@ -64,6 +65,27 @@ const productsData = [
   }
 ];
 
+const reviewsData = [
+  {
+    id: 1,
+    name: "Ahmad Rizki",
+    rating: 5,
+    comment: "Bahannya premium dan nyaman dipakai sehari-hari.",
+  },
+  {
+    id: 2,
+    name: "Nabila Putri",
+    rating: 5,
+    comment: "Desain kaos SIBER keren dan eksklusif.",
+  },
+  {
+    id: 3,
+    name: "Fajar Ramadhan",
+    rating: 4,
+    comment: "Jahitan rapi dan ukuran sesuai deskripsi.",
+  },
+];
+
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState('Semua');
@@ -87,7 +109,7 @@ function App() {
       
       <AboutSection />
       
-      <ProductSection 
+      <ProductSection
         products={productsData}
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
@@ -96,7 +118,8 @@ function App() {
         onQuickView={setActiveQuickView}
       />
 
-      {/* Footer Layout */}
+      <ReviewSection reviews={reviewsData} />
+
       <Footer scrollToId={scrollToId} />
 
       {/* Overlay Product Detail Modal */}
