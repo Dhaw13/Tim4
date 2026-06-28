@@ -29,6 +29,11 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
     protected function casts(): array
     {
         return [

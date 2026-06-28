@@ -6,9 +6,9 @@ import kaos3 from '../assets/kaos3.jpeg';
 import kaos4 from '../assets/kaos4.jpeg';
 
 function ProductDetailModal({ product, onClose }) {
-  if (!product) return null;
-
   const [selectedSize, setSelectedSize] = useState('L');
+
+  if (!product) return null;
 
   // Image source matcher to represent actual local assets
   const getProductImage = (productId) => {

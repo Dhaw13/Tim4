@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 // Layouts
 import Navbar from './layouts/Navbar';
@@ -12,6 +12,9 @@ import ReviewSection from './pages/ReviewSection';
 
 // Components
 import ProductDetailModal from './components/ProductDetailModal';
+
+// API
+import { api } from './api';
 
 // Product database matching the user's latest updates
 const productsData = [
@@ -65,31 +68,21 @@ const productsData = [
   }
 ];
 
-const reviewsData = [
-  {
-    id: 1,
-    name: "Ahmad Rizki",
-    rating: 5,
-    comment: "Bahannya premium dan nyaman dipakai sehari-hari.",
-  },
-  {
-    id: 2,
-    name: "Nabila Putri",
-    rating: 5,
-    comment: "Desain kaos SIBER keren dan eksklusif.",
-  },
-  {
-    id: 3,
-    name: "Fajar Ramadhan",
-    rating: 4,
-    comment: "Jahitan rapi dan ukuran sesuai deskripsi.",
-  },
-];
+const reviewsData = [];
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState('Semua');
   const [activeQuickView, setActiveQuickView] = useState(null);
+  const [reviews, setReviews] = useState(reviewsData);
+
+  useEffect(() => {
+    api.get('/reviews')
+      .then((res) => {
+        if (res.success) setReviews(res.data);
+      })
+      .catch(() => {});
+  }, []);
 
   // Smooth scroll helper
   const scrollToId = (id) => {
@@ -118,7 +111,7 @@ function App() {
         onQuickView={setActiveQuickView}
       />
 
-      <ReviewSection reviews={reviewsData} />
+      <ReviewSection reviews={reviews} />
 
       <Footer scrollToId={scrollToId} />
 

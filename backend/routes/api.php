@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\API\AdminReviewController;
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\ReviewController;
 use App\Http\Controllers\API\RolePermissionController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,6 +18,10 @@ Route::prefix('auth')->group(function () {
     Route::post('/login',    [AuthController::class, 'login']);
 });
 
+Route::get('/reviews',             [ReviewController::class, 'index']);
+Route::get('/reviews/{id}',        [ReviewController::class, 'show']);
+Route::get('/products/{productId}/reviews', [ReviewController::class, 'productReviews']);
+
 // ==================== PROTECTED ROUTES ====================
 Route::middleware('auth:sanctum')->group(function () {
 
@@ -25,6 +31,11 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/logout',     [AuthController::class, 'logout']);
         Route::post('/logout-all', [AuthController::class, 'logoutAll']);
     });
+
+    // Reviews
+    Route::post('/reviews',             [ReviewController::class, 'store']);
+    Route::put('/reviews/{id}',         [ReviewController::class, 'update']);
+    Route::delete('/reviews/{id}',      [ReviewController::class, 'destroy']);
 
     // Role & Permission Management (khusus admin)
     Route::middleware('role:admin')->prefix('admin')->group(function () {
@@ -43,10 +54,11 @@ Route::middleware('auth:sanctum')->group(function () {
         // Assign/Revoke role ke user
         Route::post('/users/{userId}/assign-role', [RolePermissionController::class, 'assignRole']);
         Route::post('/users/{userId}/revoke-role', [RolePermissionController::class, 'revokeRole']);
-    });
 
-    // Contoh route dengan cek permission spesifik
-    Route::middleware('can:manage-products')->group(function () {
-        // Route::apiResource('/products', ProductController::class);
+        // Admin Reviews
+        Route::get('/reviews',                                [AdminReviewController::class, 'index']);
+        Route::put('/reviews/{id}/toggle-visibility',        [AdminReviewController::class, 'toggleVisibility']);
+        Route::put('/reviews/{id}/reply',                    [AdminReviewController::class, 'reply']);
+        Route::delete('/reviews/{id}',                       [AdminReviewController::class, 'destroy']);
     });
 });

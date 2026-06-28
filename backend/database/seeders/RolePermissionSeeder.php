@@ -34,6 +34,12 @@ class RolePermissionSeeder extends Seeder
             // Orders (contoh modul)
             'view-orders',
             'manage-orders',
+
+            // Reviews
+            'view-reviews',
+            'create-reviews',
+            'edit-reviews',
+            'delete-reviews',
         ];
 
         foreach ($permissions as $permission) {

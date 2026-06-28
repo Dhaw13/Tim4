@@ -108,8 +108,43 @@ function ReviewSection({ reviews }) {
                   fontWeight: "700",
                 }}
               >
-                {review.name}
+                {review.user_name}
               </h4>
+
+              {review.reply && (
+                <div
+                  style={{
+                    marginTop: "16px",
+                    padding: "12px",
+                    background: "rgba(245,158,11,0.05)",
+                    borderLeft: "3px solid var(--primary)",
+                    borderRadius: "6px",
+                  }}
+                >
+                  <p
+                    style={{
+                      fontSize: "12px",
+                      color: "var(--primary)",
+                      fontWeight: "600",
+                      marginBottom: "4px",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.5px",
+                    }}
+                  >
+                    Balasan Admin
+                  </p>
+                  <p
+                    style={{
+                      color: "#e2e8f0",
+                      fontSize: "14px",
+                      lineHeight: "1.6",
+                      margin: 0,
+                    }}
+                  >
+                    "{review.reply}"
+                  </p>
+                </div>
+              )}
             </div>
           ))}
         </div>
